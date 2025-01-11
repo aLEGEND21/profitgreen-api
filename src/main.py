@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from scalar_fastapi import get_scalar_api_reference
 
 from api import portfolio_router
 
@@ -59,4 +60,12 @@ async def root(request: Request):
     """
     return templates.TemplateResponse(
         request=request, name="index.html", context={"features": features}
+    )
+
+
+@app.get("/scalar", include_in_schema=False)
+async def scalar_html():
+    return get_scalar_api_reference(
+        openapi_url=app.openapi_url,
+        title=app.title,
     )

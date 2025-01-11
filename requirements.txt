@@ -2,3 +2,4 @@ fastapi
 jinja2
 motor
 python-dotenv
+scalar-fastapi
