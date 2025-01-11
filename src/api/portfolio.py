@@ -8,11 +8,21 @@ router = APIRouter()
 
 @router.get("/")
 async def root(portfolio=Depends(get_portfolio)):
-    return {"detail": "Hello Portfolio", "count": await portfolio.count_documents({})}
+    """
+    View the number of users in the portfolio database.
+    """
+    return {
+        "detail": "Portfolio Endpoint",
+        "count": await portfolio.count_documents({}),
+    }
 
 
 @router.get("/history/{user_id}")
 async def get_history(user_id: int, portfolio=Depends(get_portfolio)):
+    """
+    Retrieves the trade history for a user, including the timestamp, ticker, and quantity of shares,
+    and price each trade was executed at.
+    """
     user = await portfolio.find_one({"_id": user_id})
 
     if not user:
@@ -26,6 +36,9 @@ async def get_history(user_id: int, portfolio=Depends(get_portfolio)):
 
 @router.get("/holdings/{user_id}")
 async def get_holdings(user_id: int, portfolio=Depends(get_portfolio)):
+    """
+    Retrieves the current holdings for a user, including the ticker and quantity of shares.
+    """
     user = await portfolio.find_one({"_id": user_id})
 
     if not user:
