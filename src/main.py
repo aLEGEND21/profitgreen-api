@@ -7,13 +7,17 @@ from api import portfolio_router
 
 app = FastAPI(title="ProfitGreen API", version="0.1.0")
 
+# Set up static files
 app.mount("/static", StaticFiles(directory="src/static"), name="static")
 
+# Add routers
 app.include_router(portfolio_router, prefix="/portfolio")
 
+# Set up templates so HTML can be rendered
 templates = Jinja2Templates(directory="src/templates")
 
 
+# Declare the features that will be displayed on the homepage
 features = [
     {
         "title": "Real-Time Data",
@@ -50,6 +54,9 @@ features = [
 
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
+    """
+    Render the homepage with the features that will be displayed.
+    """
     return templates.TemplateResponse(
         request=request, name="index.html", context={"features": features}
     )
