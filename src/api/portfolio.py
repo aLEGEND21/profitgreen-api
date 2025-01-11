@@ -7,7 +7,7 @@ router = APIRouter()
 
 
 @router.get("/")
-async def root(portfolio=Depends(get_portfolio)):
+async def view_portfolio_overview(portfolio=Depends(get_portfolio)):
     """
     View the number of users in the portfolio database.
     """
