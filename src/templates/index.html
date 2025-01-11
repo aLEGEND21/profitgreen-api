@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="og:title" content="ProfitGreen API" />
+    <meta
+      name="og:description"
+      content="ProfitGreen API is a RESTful API that provides data about the popular ProfitGreen Discord bot"
+    />
+    <meta name="theme-color" content="#26ba9c" />
+    <meta property="og:image:width" content="64" />
+    <meta property="og:image:height" content="64" />
+    <meta property="og:image" content="/static/pfp.png" />
+
+    <title>ProfitGreen API</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/static/pfp.png" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/index.css" />
+
+    <!-- Custom Font Awesome Kit -->
+    <script
+      src="https://kit.fontawesome.com/7c07511309.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <!-- Page Header -->
+    <div class="pt-5 pb-5 h-100 bg-green text-white text-center">
+      <p class="display-6">ProfitGreen API</p>
+      <p class="fs-5 mt-n3">A Trove of Data—At Your Fingertips</p>
+      <a href="/docs">
+        <button class="btn btn-green">
+          <i class="fa-solid fa-file pe-1"></i>
+          View Docs
+        </button>
+      </a>
+    </div>
+
+    <!-- Features -->
+    <div class="container mt-5 pt-5 text-center">
+      <div class="row justify-content-center">
+        {% for feature in features %}
+        <div class="card col-10 col-md-5 col-lg-3 mb-4 ms-2 me-2 border-green">
+          <i
+            class="{{ feature.icon }} fa-4x brand-icon card-img-top pt-3 pb-2"
+          ></i>
+          <div class="card-body">
+            <h5 class="card-title green fw-normal">
+              {{ feature.title }} {% if not feature.active %}
+              <span class="badge bg-green text-light text-sm">Soon</span>
+              {% endif %}
+            </h5>
+            <p class="card-text text-secondary pt-2">
+              {{ feature.description }}
+            </p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light-green text-center mt-5 py-4">
+      <img src="/static/logo.png" class="mt-3" height="30rem" />
+      <small class="text-muted mt-2">
+        <br />
+        ProfitGreen has no affiliation with Discord or any third-party services.
+      </small>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

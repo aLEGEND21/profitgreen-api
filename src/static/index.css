@@ -1,0 +1,59 @@
+:root {
+    --green: rgb(38, 186, 156); /* #26ba9c */
+    --light-green: rgb(38, 186, 156, 0.1); /* #26ba9c */
+}
+
+/* Set up global green color */
+.green {
+    color: var(--green) !important;
+}
+.bg-green {
+    background-color: var(--green) !important;
+}
+.border-green {
+    border-color: var(--green) !important;
+}
+.btn-green {
+    color:rgb(255, 255, 255) !important;
+    background-color: var(--green) !important;
+    border-color: rgb(255, 255, 255) !important;
+}
+.btn-green:hover, .btn-green:focus, .btn-green:active, .btn-green.active, .open > .dropdown-toggle.btn-green {
+    color: var(--green) !important;
+    background-color: rgb(255, 255, 255) !important;
+    border-color: var(--green) !important;
+}
+.btn-outline-green {
+    color: var(--green) !important;
+    background-color: white !important;
+    border-color: var(--green) !important;
+}
+.btn-outline-green:hover, .btn-outline-green:focus, .btn-outline-green:active, .btn-outline-green.active, .open > .dropdown-toggle.btn-outline-green {
+    color: white !important;
+    background-color: var(--green) !important;
+    border-color: var(--green) !important;
+}
+
+/* Set up global light green color */
+.light-green {
+    color: var(--light-green) !important;
+}
+.bg-light-green {
+    background-color: var(--light-green) !important;
+}
+
+/* Font Awesome icon coloring */
+.brand-icon {
+    color: rgb(38, 186, 156);
+}
+
+/* Add extra margin options */
+.mt-n1 {
+    margin-top: -0.25rem !important;
+}
+.mt-n2 {
+    margin-top: -0.5rem !important;
+}
+.mt-n3 {
+    margin-top: -0.75rem !important;
+}
