@@ -22,3 +22,16 @@ async def get_history(user_id: int, portfolio=Depends(get_portfolio)):
         "user_id": user["_id"],
         "trade_history": user["trade_history"],
     }
+
+
+@router.get("/holdings/{user_id}")
+async def get_holdings(user_id: int, portfolio=Depends(get_portfolio)):
+    user = await portfolio.find_one({"_id": user_id})
+
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    return {
+        "user_id": user["_id"],
+        "holdings": user["portfolio"],
+    }
