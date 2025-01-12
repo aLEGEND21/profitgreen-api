@@ -41,3 +41,27 @@ async def get_limit_orders(user_id: int, tasks=Depends(get_tasks)):
         "user_id": user_id,
         "limit_orders": orders,
     }
+
+
+@router.get("/price_alerts/{user_id}")
+async def get_price_alerts(user_id: int, tasks=Depends(get_tasks)):
+    """
+    Retrieves the pending price alerts for a user, including the ticker and price threshold.
+    """
+    alerts = await tasks.find({"_type": "price_alert", "user_id": user_id}).to_list(
+        None
+    )
+
+    if not alerts:
+        raise HTTPException(
+            status_code=404, detail=f"No price alerts found for {user_id}"
+        )
+
+    # Convert the ObjectId to a string for JSON serialization
+    for alert in alerts:
+        alert["_id"] = str(alert["_id"])
+
+    return {
+        "user_id": user_id,
+        "price_alerts": alerts,
+    }
