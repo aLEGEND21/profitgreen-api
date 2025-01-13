@@ -1,6 +1,7 @@
 from datetime import datetime
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
+from uuid import uuid4
 
 from database import get_notes
 
@@ -35,6 +36,23 @@ async def create_note(note: NoteCreate, notes=Depends(get_notes)):
     Create a new note for other API users to view and update.
     """
     new_note = note.dict()
-    new_note.update({"created": str(datetime.now()), "updated": str(datetime.now())})
-    res = await notes.insert_one(new_note)
-    return {"detail": "Note created successfully", "id": str(res.inserted_id)}
+    new_note.update(
+        {
+            "_id": str(uuid4()),
+            "created": str(datetime.now()),
+            "updated": str(datetime.now()),
+        }
+    )
+    await notes.insert_one(new_note)
+    return {"detail": "Note created successfully", "id": new_note["_id"]}
+
+
+@router.get("/{note_id}")
+async def get_note_by_id(note_id: str, notes=Depends(get_notes)):
+    """
+    Get a note by its unique identifier.
+    """
+    note = await notes.find_one({"_id": note_id})
+    if note is None:
+        raise HTTPException(status_code=404, detail="Note not found")
+    return note
