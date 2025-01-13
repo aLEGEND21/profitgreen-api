@@ -61,7 +61,7 @@ features = [
 ]
 
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/", include_in_schema=False, response_class=HTMLResponse)
 async def root(request: Request):
     """
     Render the homepage with the features that will be displayed.
