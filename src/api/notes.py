@@ -47,6 +47,19 @@ async def create_note(note: NoteCreate, notes=Depends(get_notes)):
     return {"detail": "Note created successfully", "id": new_note["_id"]}
 
 
+@router.post("/{note_id}/update")
+async def update_note(note_id: str, note: NoteCreate, notes=Depends(get_notes)):
+    """
+    Update an existing note by its unique identifier.
+    """
+    updated_note = note.dict()
+    updated_note.update({"updated": str(datetime.now())})
+    result = await notes.update_one({"_id": note_id}, {"$set": updated_note})
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Note not found")
+    return {"detail": "Note updated successfully"}
+
+
 @router.get("/{note_id}")
 async def get_note_by_id(note_id: str, notes=Depends(get_notes)):
     """
