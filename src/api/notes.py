@@ -60,6 +60,17 @@ async def update_note(note_id: str, note: NoteCreate, notes=Depends(get_notes)):
     return {"detail": "Note updated successfully"}
 
 
+@router.post("/{note_id}/delete")
+async def delete_note(note_id: str, notes=Depends(get_notes)):
+    """
+    Delete a note by its unique identifier.
+    """
+    result = await notes.delete_one({"_id": note_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Note not found")
+    return {"detail": "Note deleted successfully"}
+
+
 @router.get("/{note_id}")
 async def get_note_by_id(note_id: str, notes=Depends(get_notes)):
     """
