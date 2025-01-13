@@ -21,12 +21,13 @@ class NoteCreate(BaseModel):
 @router.get("/")
 async def get_notes_overview(notes=Depends(get_notes)):
     """
-    View holistic information about the existing notes in the database.
+    View holistic information about the existing notes in the database and all the existing notes.
     """
     return {
         "detail": "Notes Endpoint",
         "count": await notes.count_documents({}),
         "num_authors": len(await notes.distinct("author")),
+        "notes": await notes.find().to_list(None),
     }
 
 
