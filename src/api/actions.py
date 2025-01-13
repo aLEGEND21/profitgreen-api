@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Path
 
 from database import get_tasks
 
@@ -20,10 +20,19 @@ async def view_actions_overview(tasks=Depends(get_tasks)):
 
 
 @router.get("/limit_orders/{user_id}")
-async def get_limit_orders(user_id: int, tasks=Depends(get_tasks)):
+async def get_limit_orders(
+    user_id: str = Path(
+        ..., example="416730155332009984"
+    ),  # Typehint as str and not int to prevent the value being malformed during the request
+    tasks=Depends(get_tasks),
+):
     """
     Retrieves the pending limit orders for a user, including the ticker, quantity of shares, and strike price.
     """
+    if not user_id.isdigit():
+        raise HTTPException(status_code=400, detail="Invalid user ID")
+    user_id = int(user_id)
+
     orders = await tasks.find({"_type": "LIMIT_ORDER", "user_id": user_id}).to_list(
         None
     )
@@ -44,10 +53,19 @@ async def get_limit_orders(user_id: int, tasks=Depends(get_tasks)):
 
 
 @router.get("/price_alerts/{user_id}")
-async def get_price_alerts(user_id: int, tasks=Depends(get_tasks)):
+async def get_price_alerts(
+    user_id: str = Path(
+        ..., example="416730155332009984"
+    ),  # Typehint as str and not int to prevent the value being malformed during the request
+    tasks=Depends(get_tasks),
+):
     """
     Retrieves the pending price alerts for a user, including the ticker and price threshold.
     """
+    if not user_id.isdigit():
+        raise HTTPException(status_code=400, detail="Invalid user ID")
+    user_id = int(user_id)
+
     alerts = await tasks.find({"_type": "price_alert", "user_id": user_id}).to_list(
         None
     )
