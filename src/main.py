@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from scalar_fastapi import get_scalar_api_reference
 
-from api import actions_router, portfolio_router
+from api import actions_router, notes_router, portfolio_router
 
 app = FastAPI(title="ProfitGreen API", version="0.1.0")
 
@@ -13,6 +13,7 @@ app.mount("/static", StaticFiles(directory="src/static"), name="static")
 
 # Add routers
 app.include_router(actions_router, prefix="/actions")
+app.include_router(notes_router, prefix="/notes")
 app.include_router(portfolio_router, prefix="/portfolio")
 
 # Set up templates so HTML can be rendered
@@ -50,6 +51,12 @@ features = [
         "description": "Retrieve guilds' configurations, including existing price streams that have been subscribed to.",
         "icon": "fa-solid fa-cogs",
         "active": False,
+    },
+    {
+        "title": "API Notes",
+        "description": "View and add notes about the ProfitGreen API HTTP requests. Notes are viewable by all users.",
+        "icon": "fa-solid fa-pencil-alt",
+        "active": True,
     },
 ]
 

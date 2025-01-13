@@ -5,8 +5,13 @@ from config import Config
 
 client = AsyncIOMotorClient(Config.MONGODB_URI)
 db = client["ProfitGreen"]
+notes_col = db["API-Notes"]
 portfolio_col = db["Portfolio"]
 tasks_col = db["Tasks"]
+
+
+def get_notes():
+    return notes_col
 
 
 def get_portfolio():
