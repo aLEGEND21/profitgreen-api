@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from scalar_fastapi import get_scalar_api_reference
 
-from api import actions_router, notes_router, portfolio_router
+from api import actions_router, notes_router, portfolio_router, stats_router
 
 app = FastAPI(title="ProfitGreen API", version="0.1.0")
 
@@ -15,6 +15,7 @@ app.mount("/static", StaticFiles(directory="src/static"), name="static")
 app.include_router(actions_router, prefix="/actions")
 app.include_router(notes_router, prefix="/notes")
 app.include_router(portfolio_router, prefix="/portfolio")
+app.include_router(stats_router, prefix="/stats")
 
 # Set up templates so HTML can be rendered
 templates = Jinja2Templates(directory="src/templates")
