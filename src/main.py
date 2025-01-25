@@ -45,7 +45,7 @@ features = [
         "title": "Bot Statistics",
         "description": "Analyze the bot's performance, including the number of commands executed and the number of guilds.",
         "icon": "fa-solid fa-chart-bar",
-        "active": False,
+        "active": True,
     },
     {
         "title": "Server Configurations",
