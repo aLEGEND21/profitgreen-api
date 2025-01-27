@@ -9,8 +9,8 @@ A simple API to retrieve data about the popular Discord bot ProfitGreen. This AP
 - **Real-Time Data:** View the latest data about the ProfitGreen Discord bot, including portfolios, actions, and bot statistics.
 - **Portfolio Statistics:** Retrieve valuable portfolio data, such as holdings and trade history, with ease.
 - **Pending Actions:** View pending actions, such as limit order and price alerts, without opening the Discord app.
-- **Bot Statistics (_Soon_):** Analyze the bot's performance, including the number of commands executed and the number of guilds.
-- **Server Configurations (_Soon_)**: Retrieve guilds' configurations, including existing price streams that have been subscribed to.
+- **Bot Statistics:** Analyze the bot's performance, including the number of commands executed and the number of guilds.
+- **Server Configurations**: Retrieve guilds' configurations, including existing price streams that have been subscribed to.
 - **API Notes**: View and add notes about the ProfitGreen API HTTP requests. Notes are viewable by all users.
 
 ## Implemented Functionality
